@@ -2,29 +2,31 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Default Configuration
-    const DEFAULT_CONFIG = {
+        const DEFAULT_CONFIG = {
         name: "ALSHKA",
         bio: "مرحباً بك في صفحتي التعريفية الشخصية. يمكنك الوصول إلى جميع حساباتي الرسمية وقنوات التواصل معي من خلال الروابط أدناه.",
         avatar: "avatar.png",
         passcode: "1234",
         links: [
-            { id: "1", platform: "whatsapp", title: "واتساب", subtitle: "تواصل معي مباشرة ومحادثة فورية", url: "https://wa.me/your_number" },
-            { id: "2", platform: "snapchat", title: "سناب شات", subtitle: "تابع يومياتي ولقطاتي اليومية", url: "https://snapchat.com/add/your_username" },
-            { id: "3", platform: "instagram", title: "إنستغرام", subtitle: "شاهد أحدث الصور ومقاطع الريلز الخاصة بي", url: "https://instagram.com/your_username" },
-            { id: "4", platform: "tiktok", title: "تيك توك", subtitle: "شاهد الفيديوهات القصيرة والمسلية", url: "https://tiktok.com/@your_username" },
-            { id: "5", platform: "kick", title: "كيك (Kick)", subtitle: "تابع بثي المباشر والألعاب الحماسية", url: "https://kick.com/your_username" },
-            { id: "6", platform: "twitch", title: "تويتش (Twitch)", subtitle: "انضم لمجتمع الألعاب والبث المباشر الخاص بي", url: "https://twitch.tv/your_username" },
-            { id: "7", platform: "x", title: "إكس (تويتر)", subtitle: "اقرأ أفكاري وتغريداتي ومقالاتي", url: "https://x.com/your_username" },
-            { id: "8", platform: "youtube", title: "يوتيوب", subtitle: "اشترك في قناتي لمتابعة الفيديوهات المميزة", url: "https://youtube.com/@your_username" },
-            { id: "9", platform: "telegram", title: "تيليجرام", subtitle: "انضم لقناتي لمتابعة التحديثات الحصرية", url: "https://t.me/your_username" },
-            { id: "10", platform: "discord", title: "ديسكورد (Discord)", subtitle: "دردش وتواصل مع مجتمعنا الخاص", url: "https://discord.gg/your_invite" },
-            { id: "11", platform: "steam", title: "ستيم (Steam)", subtitle: "العب معي وتابع قائمة ألعابي المفضلة", url: "https://steamcommunity.com/id/your_id" },
-            { id: "12", platform: "email", title: "البريد الإلكتروني", subtitle: "راسلني للاستفسارات والأعمال الرسمية", url: "mailto:your_email@domain.com" }
+            { id: "1", platform: "instagram", title: "إنستغرام", subtitle: "شاهد أحدث الصور ومقاطع الريلز الخاصة بي", url: "https://instagram.com/your_username" },
+            { id: "2", platform: "tiktok", title: "تيك توك", subtitle: "شاهد الفيديوهات القصيرة والمسلية", url: "https://tiktok.com/@your_username" },
+            { id: "3", platform: "kick", title: "كيك (Kick)", subtitle: "تابع بثي المباشر والألعاب الحماسية", url: "https://kick.com/your_username" },
+            { id: "4", platform: "youtube", title: "يوتيوب", subtitle: "اشترك في قناتي لمتابعة الفيديوهات المميزة", url: "https://youtube.com/@your_username" },
+            { id: "5", platform: "telegram", title: "تيليجرام", subtitle: "انضم لقناتي لمتابعة التحديثات الحصرية", url: "https://t.me/your_username" },
+            { id: "6", platform: "discord", title: "ديسكورد (Discord)", subtitle: "دردش وتواصل مع مجتمعنا الخاص", url: "https://discord.gg/your_invite" },
+            { id: "7", platform: "steam", title: "ستيم (Steam)", subtitle: "العب معي وتابع قائمة ألعابي المفضلة", url: "https://steamcommunity.com/id/your_id" }
         ]
     };
 
     // Load configuration
-    const appConfig = JSON.parse(localStorage.getItem('alshka_bio_config')) || { ...DEFAULT_CONFIG };
+    let appConfig = JSON.parse(localStorage.getItem('alshka_bio_config')) || { ...DEFAULT_CONFIG };
+    
+    // Migration: If they have the old default 12 links configuration, update it to the new 7 links
+    if (appConfig.links && appConfig.links.length === 12) {
+        appConfig = { ...DEFAULT_CONFIG };
+        appConfig.links = [...DEFAULT_CONFIG.links];
+        localStorage.setItem('alshka_bio_config', JSON.stringify(appConfig));
+    }
     
     // Fallback links check
     if (!appConfig.links) {
