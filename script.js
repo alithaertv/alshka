@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: "1", platform: "instagram", title: "إنستغرام", subtitle: "شاهد أحدث الصور ومقاطع الريلز الخاصة بي", url: "https://instagram.com/alshka.iq" },
             { id: "2", platform: "tiktok", title: "تيك توك", subtitle: "شاهد الفيديوهات القصيرة والمسلية", url: "https://tiktok.com/@mkd.55" },
             { id: "3", platform: "kick", title: "كيك (Kick)", subtitle: "تابع بثي المباشر والألعاب الحماسية", url: "https://kick.com/s0s9" },
-            { id: "4", platform: "youtube", title: "يوتيوب", subtitle: "اشترك في قناتي لمتابعة الفيديوهات المميزة", url: "https://youtube.com/@alshka.iq" },
+            { id: "4", platform: "youtube", title: "يوتيوب", subtitle: "اشترك في قناتي لمتابعة الفيديوهات المميزة", url: "https://youtube.com/@alshka-iq" },
             { id: "5", platform: "telegram", title: "تيليجرام", subtitle: "انضم لقناتي لمتابعة التحديثات الحصرية", url: "https://t.me/xxcbb" },
             { id: "6", platform: "discord", title: "ديسكورد (Discord)", subtitle: "دردش وتواصل مع مجتمعنا الخاص", url: "https://discord.gg/alshka.iq" },
             { id: "7", platform: "steam", title: "ستيم (Steam)", subtitle: "العب معي وتابع قائمة ألعابي المفضلة", url: "https://steamcommunity.com/profiles/76561199697498685" }
