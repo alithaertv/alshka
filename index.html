@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALSHKA | الحساب الشخصي</title>
+    
+    <!-- Meta tags for SEO and Social Media -->
+    <meta name="description" content="الصفحة الشخصية والتعريفية لـ ALSHKA. تواصل معي عبر جميع منصات التواصل الاجتماعي الخاصة بي في مكان واحد.">
+    <meta property="og:title" content="ALSHKA | الحساب الشخصي">
+    <meta property="og:description" content="الصفحة الشخصية والتعريفية لـ ALSHKA. تواصل معي عبر جميع منصات التواصل الاجتماعي الخاصة بي.">
+    <meta property="og:image" content="avatar.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="avatar.png">
+    
+    <!-- Google Fonts: Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glows -->
+    <div class="glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="profile-container" id="profileContainer">
+        <!-- Profile Header -->
+        <header class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="avatar.png" alt="ALSHKA Avatar" class="profile-avatar" id="profileAvatar">
+                <div class="avatar-ring"></div>
+            </div>
+            <h1 class="profile-name" id="profileName">
+                ALSHKA
+                <span class="verified-badge" title="حساب موثق"><i class="fas fa-check-circle"></i></span>
+            </h1>
+            <p class="profile-bio" id="profileBio">مرحباً بك في صفحتي التعريفية الشخصية. يمكنك الوصول إلى جميع حساباتي الرسمية وقنوات التواصل معي من خلال الروابط أدناه.</p>
+        </header>
+
+        <!-- Main Action Buttons (Share, QR, Admin) -->
+        <div class="action-buttons">
+            <button class="action-btn" id="shareBtn" title="نسخ رابط الصفحة">
+                <i class="fas fa-share-alt"></i>
+                <span>مشاركة</span>
+            </button>
+            <button class="action-btn" id="qrBtn" title="عرض رمز QR">
+                <i class="fas fa-qrcode"></i>
+                <span>رمز QR</span>
+            </button>
+            <button class="action-btn" id="adminBtn" title="لوحة التحكم">
+                <i class="fas fa-cog"></i>
+                <span>لوحة التحكم</span>
+            </button>
+        </div>
+
+        <!-- Social Links List (Dynamic) -->
+        <section class="links-section" id="linksSection">
+            <!-- Dynamic link cards will be injected here via JavaScript -->
+        </section>
+
+        <!-- Footer -->
+        <footer class="profile-footer">
+            <p>© <span id="currentYear"></span> جميع الحقوق محفوظة لـ <span class="footer-highlight" id="footerName">ALSHKA</span></p>
+        </footer>
+    </main>
+
+    <!-- QR Code Modal -->
+    <div class="modal-overlay" id="qrModal">
+        <div class="modal-card">
+            <button class="close-modal-btn" id="closeModalBtn" aria-label="إغلاق النافذة">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">رمز الاستجابة السريعة (QR Code)</h3>
+            <p class="modal-desc">امسح الرمز أدناه بهاتفك لفتح الصفحة ومشاركتها بسهولة.</p>
+            <div class="qr-wrapper">
+                <div id="qrPlaceholder" class="qr-placeholder">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <img id="qrImage" src="" alt="QR Code" style="display: none;">
+            </div>
+            <button class="download-qr-btn" id="downloadQrBtn">
+                <i class="fas fa-download"></i>
+                <span>تحميل رمز QR</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Passcode Modal -->
+    <div class="modal-overlay" id="passcodeModal">
+        <div class="modal-card passcode-card">
+            <button class="close-modal-btn" id="closePasscodeModalBtn" aria-label="إغلاق النافذة">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">رمز الدخول</h3>
+            <p class="modal-desc">أدخل رمز المرور لفتح لوحة التحكم (الافتراضي: 1234)</p>
+            <div class="passcode-input-wrapper">
+                <input type="password" id="passcodeInput" placeholder="••••" maxlength="8">
+            </div>
+            <button class="download-qr-btn" id="submitPasscodeBtn">دخول</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="modal-card admin-card">
+            <button class="close-modal-btn" id="closeAdminModalBtn" aria-label="إغلاق النافذة">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">لوحة التحكم</h3>
+            
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="linksTab">إدارة الروابط</button>
+                <button class="tab-btn" data-tab="profileTab">الملف الشخصي</button>
+                <button class="tab-btn" data-tab="settingsTab">الإعدادات</button>
+            </div>
+
+            <!-- Tab Content: Links Management -->
+            <div class="tab-content active" id="linksTab">
+                <div class="link-manager-actions">
+                    <button class="add-new-link-btn" id="addNewLinkBtn">
+                        <i class="fas fa-plus"></i> إضافة رابط جديد
+                    </button>
+                </div>
+                
+                <!-- Form to Add/Edit Link (Collapsed by default) -->
+                <form class="link-form" id="linkForm" style="display: none;">
+                    <input type="hidden" id="editLinkId">
+                    <div class="form-group">
+                        <label for="linkPlatform">المنصة</label>
+                        <select id="linkPlatform" required>
+                            <option value="whatsapp">واتساب</option>
+                            <option value="snapchat">سناب شات</option>
+                            <option value="instagram">إنستغرام</option>
+                            <option value="tiktok">تيك توك</option>
+                            <option value="x">إكس (تويتر)</option>
+                            <option value="youtube">يوتيوب</option>
+                            <option value="telegram">تيليجرام</option>
+                            <option value="email">البريد الإلكتروني</option>
+                            <option value="custom">رابط مخصص</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkTitle">العنوان الرئيسي</label>
+                        <input type="text" id="linkTitle" placeholder="مثال: واتساب" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkSubtitle">العنوان الفرعي</label>
+                        <input type="text" id="linkSubtitle" placeholder="مثال: تواصل معي مباشرة" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkUrl">الرابط الإلكتروني (URL)</label>
+                        <input type="url" id="linkUrl" placeholder="https://..." required>
+                    </div>
+                    <div class="form-group custom-icon-group" id="customIconGroup" style="display: none;">
+                        <label for="linkIconClass">أيقونة مخصصة (فئة FontAwesome)</label>
+                        <input type="text" id="linkIconClass" placeholder="مثال: fas fa-globe">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-form-btn" id="saveLinkFormBtn">حفظ</button>
+                        <button type="button" class="cancel-form-btn" id="cancelLinkFormBtn">إلغاء</button>
+                    </div>
+                </form>
+
+                <!-- List of current links in admin dashboard -->
+                <div class="admin-links-list" id="adminLinksList">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- Tab Content: Profile Settings -->
+            <div class="tab-content" id="profileTab">
+                <form id="profileEditForm">
+                    <div class="form-group">
+                        <label>الصورة الشخصية</label>
+                        <div class="avatar-upload-wrapper">
+                            <img src="avatar.png" id="avatarPreview" alt="Avatar Preview">
+                            <div class="upload-btn-wrapper">
+                                <span class="upload-text"><i class="fas fa-cloud-upload-alt"></i> اختر صورة</span>
+                                <input type="file" id="avatarUploadInput" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileNameInput">الاسم التعريفي</label>
+                        <input type="text" id="profileNameInput" placeholder="ALSHKA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileBioInput">الوصف الشخصي (البيو)</label>
+                        <textarea id="profileBioInput" rows="3" placeholder="مرحباً بك في..." required></textarea>
+                    </div>
+                    <button type="submit" class="download-qr-btn" id="saveProfileBtn">حفظ التغييرات</button>
+                </form>
+            </div>
+
+            <!-- Tab Content: System Settings -->
+            <div class="tab-content" id="settingsTab">
+                <div class="form-group">
+                    <label for="changePasscodeInput">تغيير رمز المرور</label>
+                    <div class="input-action-row">
+                        <input type="password" id="changePasscodeInput" placeholder="رمز مرور جديد" maxlength="8">
+                        <button class="change-pass-btn" id="savePasscodeBtn">تحديث</button>
+                    </div>
+                </div>
+                <hr class="settings-divider">
+                <div class="backup-actions">
+                    <button class="settings-action-btn backup-btn" id="exportBackupBtn">
+                        <i class="fas fa-file-export"></i> تصدير البيانات (نسخة احتياطية)
+                    </button>
+                    <div class="import-wrapper">
+                        <button class="settings-action-btn import-btn" id="triggerImportBtn">
+                            <i class="fas fa-file-import"></i> استيراد البيانات (رفع نسخة)
+                        </button>
+                        <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                    </div>
+                    <button class="settings-action-btn reset-btn" id="resetDefaultsBtn">
+                        <i class="fas fa-history"></i> إعادة ضبط المصنع
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <span class="toast-message">تم نسخ الرابط بنجاح!</span>
+        </div>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
